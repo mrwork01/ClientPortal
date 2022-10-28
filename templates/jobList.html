@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link href="{{ url_for('static', filename='css/dataFrame.css') }}" type= "text/css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/admin.css') }}" type= "text/css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <script src="{{ url_for('static', filename='js/jquery-3.5.0.js') }}" type="text/javascript"></script>
+    <script src="{{ url_for('static', filename='js/adminFilter.js') }}" type="text/javascript"></script>
+  </head>
+  <body>
+  <div style="background-color: gray;"> 
+    <div name="side" style="float: left; width: 23%" class="jobFrame" >
+        <div style="margin-top: 15px;"><center><h1><u>Admin Panel</u></h1></center></div>
+        <div style="height: 20px;"></div>
+        <div>
+          <a href="/users" class="sideLink">
+            <img src="{{ url_for('static', filename='icons/users.png') }}" class="sideIcon">Users
+          </a>
+        </div>
+        <div>
+          <a href="/register" class="sideLink">
+            <img src="{{ url_for('static', filename='icons/addUsers.png') }}" class="sideIcon">Add Users
+          </a>
+        </div>
+        <div>
+          <a href="/admin" class="sideLink">
+            <img src="{{ url_for('static', filename='icons/workOrders.png') }}" class="sideIcon">Work Orders
+          </a>
+        </div>
+        <div>
+          <a href="/addJob" class="sideLink">
+            <img src="{{ url_for('static', filename='icons/addOrder.png') }}" class="sideIcon">Add Order
+          </a>
+        </div>
+        <div style="height: 40px;"></div>
+        <div style="margin-left: 20px;">
+          Filter by:
+          <br>
+          <br>
+          <form class="filterWO" action="#">
+            WO#: <input type="text" name="wo_filter" id="wo_filter">
+            <button type="button" class="WOFilterButton" id="WOFilterButton">Filter</button>
+          </form>
+            <br>
+            <br>
+            <form>
+            Manager:
+              <select name="manager_filter" id="manager_filter">
+                <option disabled selected value=''> --Select a Manager--</option>
+                {% for name in associates %}
+                <option value="{{name}}">{{name}}</option>
+                {% endfor %}
+              </select>
+              <br>
+              <br>
+            </form>
+            <form>
+            Status: 
+              <select name="status_filter" id="status_filter">
+                <option disabled selected value=''> --Select a Status--</option>
+                <option value="Open">Open</option>
+                <option value="Received">Received</option>
+                <option value="Added to Schedule">Added to Schedule</option>
+                <option value="Assessed">Assessed</option>
+                <option value="Estimate Sent">Estimate Sent</option>
+                <option value="Complete">Complete</option>
+              </select>
+              <br>
+              <br>
+          </form>
+        </div>
+       <div style="height: 300px;" id="filterListDiv">
+          <br>
+          <br>
+          <span>Applied Filter:</span>
+          <ul class="filter-list" id="filterList">
+            <li><span>Status: Open</span></li>
+          </ul>
+       </div>
+    </div>
+  </div>
+  <div name="main" style="float: left; width: 73%;">
+  	<div>
+      <div style="display: inline-block;">
+      </div>
+      <div style="text-align: right;">
+        <font size="4">
+          Hi,&nbsp{{user_first}}
+          <br>
+          <a href="/logout"> Logout </a>
+        </font>
+      </div>
+    </div>
+    <div id="mainDiv">
+      <div style="text-align: center; padding: 50px;">
+  		<h1><u>Client Orders</u></h1>
+  		</div>
+  		<div style="text-align: center;" id="orderTable">
+  			 <table class="tableLay">
+  				  <tr>
+              		<td class="dataLay">Work Order #</td>
+              		<td class="dataLay">Owner</td>
+              		<td class="dataLay">Customer</td>
+              		<td class="dataLay">Address</td>
+              		<td class="dataLay">Status</td>
+              		<td class="dataLay">Next Date</td>
+           		</tr>
+          		</tr>
+          			{% for item in client_jobs %}
+            	<tr id="row{{item.wo_num}}">
+              		<td class="dataLay">{{item.wo_num}}</td>
+              		<td class="dataLay">{{item.manager_id}}</td>
+              		<td class="dataLay">{{item.company}}</td>
+              		<td class="dataLay">{{item.address}}</td>
+              		<td class="dataLay">
+                  <form  name={item.id} class="changeStatus" id="statusUpdateForm{{ item.wo_num }}" wo_id="{{item.wo_num}}">
+                    <select name="statusUpdate" id="statusUpdate{{item.wo_num}}">
+                      <option value="Received" {% if item.status == "Received" %} selected {% endif %}>Received</option>
+                      <option value="Added to Schedule" {% if item.status == "Added to Schedule" %} selected {% endif %}>Added to Schedule</option>
+                      <option value="Assessed" {% if item.status == "Assessed" %} selected {% endif %}>Assessed</option>
+                      <option value="Estimate Sent" {% if item.status == "Estimate Sent" %} selected {% endif %}>Estimate Sent</option>
+                      <option value="Complete" {% if item.status == "Complete" %} selected {% endif %}>Complete</option>
+                    </select>
+                  </form>
+                  </td>
+              		<td class="dataLay">
+                    <form class="changeDate" wo_id="{{item.wo_num}}">
+                      {% if item.next_date == "None" %}
+                        <input value="" id="nextDateUpdate{{item.wo_num}}" class="nextDateUpdate" wo_id="{{item.wo_num}}">
+                      {% else %}
+                        <input value="{{item.next_date}}" id="nextDateUpdate{{item.wo_num}}" class="nextDateUpdate" wo_id="{{item.wo_num}}">
+                      {% endif %}
+                    </form>
+                  </td>
+            	</tr>
+          			{% endfor %}
+    		  </table>
+    	 </div>
+    </div>
+  </div>
+  <script> 
+      let rows = document.querySelectorAll('tr:nth-child(even)');
+
+      rows.forEach(function(row){
+        row.style.background = 'white';
+          });
+  </script>
+
+  </body>
+</html>

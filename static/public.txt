@@ -1,0 +1,4 @@
+- Change path in database.py to "patth/to/main/folder"
+- Create new empy database, add demo user
+- Change Login background
+- Change name on register.html

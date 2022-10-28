@@ -1,0 +1,21 @@
+<table class="tableLay">
+  <tr>
+    <td class="dataLay">Work Order #</td>
+    <td class="dataLay">Owner</td>
+    <td class="dataLay">Customer</td>
+    <td class="dataLay">Address</td>
+    <td class="dataLay">Status</td>
+    <td class="dataLay">Next Date</td>
+  </tr>
+  </tr>
+    {% for item in client_jobs %}
+  <tr id="row{{item.wo_num}}">
+    <td class="dataLay">{{item.wo_num}}</td>
+    <td class="dataLay">{{item.manager_id}}</td>
+    <td class="dataLay">{{item.company}}</td>
+    <td class="dataLay">{{item.address}}</td>
+    <td class="dataLay">{{item.status}}</td>
+    <td class="dataLay">{{item.next_date}}</td>
+  </tr>
+    {% endfor %}
+</table>

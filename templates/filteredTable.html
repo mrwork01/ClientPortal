@@ -1,0 +1,40 @@
+<table class="tableLay">
+  <tr>
+    <td class="dataLay">Work Order #</td>
+    <td class="dataLay">Owner</td>
+    <td class="dataLay">Customer</td>
+    <td class="dataLay">Address</td>
+    <td class="dataLay">Status</td>
+    <td class="dataLay">Next Date</td>
+  </tr>
+  </tr>
+    {% for item in client_jobs %}
+  <tr id="row{{item.wo_num}}">
+    <td class="dataLay">{{item.wo_num}}</td>
+    <td class="dataLay">{{item.manager_id}}</td>
+    <td class="dataLay">{{item.company}}</td>
+    <td class="dataLay">{{item.address}}</td>
+    <td class="dataLay">
+      <form  name={item.id} class="changeStatus" id="statusUpdateForm{{ item.wo_num }}" wo_id="{{item.wo_num}}">
+        <select name="statusUpdate" id="statusUpdate{{item.wo_num}}">
+          <option value="Open" {% if item.status == "Open" %} selected {% endif %}>Open</option>
+          <option value="Received" {% if item.status == "Received" %} selected {% endif %}>Received</option>
+          <option value="Added to Schedule" {% if item.status == "Added to Schedule" %} selected {% endif %}>Added to Schedule</option>
+          <option value="Assessed" {% if item.status == "Assessed" %} selected {% endif %}>Assessed</option>
+          <option value="Estimate Sent" {% if item.status == "Estimate Sent" %} selected {% endif %}>Estimate Sent</option>
+          <option value="Complete" {% if item.status == "Complete" %} selected {% endif %}>Complete</option>
+        </select>
+      </form>
+    </td>
+    <td class="dataLay">
+      <form class="changeDate" wo_id="{{item.wo_num}}">
+        {% if item.next_date == "None" %}
+        <input value="" id="nextDateUpdate{{item.wo_num}}" class="nextDateUpdate" wo_id="{{item.wo_num}}">
+        {% else %}
+        <input value="{{item.next_date}}" id="nextDateUpdate{{item.wo_num}}" class="nextDateUpdate" wo_id="{{item.wo_num}}">
+        {% endif %}
+      </form>
+    </td>
+  </tr>
+    {% endfor %}
+</table>

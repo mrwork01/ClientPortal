@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link href="{{ url_for('static', filename='css/dataFrame.css') }}" type= "text/css" rel="stylesheet">
+  </head>
+  <body>
+  	<div style="background-color: gray;"> 
+    <div name="side" style="float: left; width: 23%" class="jobFrame" >
+        <div style="margin-top: 15px;"><center><h1><u>Admin Panel</u></h1></center></div>
+        <div style="height: 20px;"></div>
+        <div>
+          <a href="/users" class="sideLink">
+            <img src="{{ url_for('static', filename='icons/users.png') }}" class="sideIcon">Users
+          </a>
+        </div>
+        <div>
+          <a href="/register" class="sideLink">
+            <img src="{{ url_for('static', filename='icons/addUsers.png') }}" class="sideIcon">Add Users
+          </a>
+        </div>
+        <div>
+          <a href="/admin" class="sideLink">
+            <img src="{{ url_for('static', filename='icons/workOrders.png') }}" class="sideIcon">Work Orders
+          </a>
+        </div>
+        <div>
+          <a href="/addJob" class="sideLink">
+            <img src="{{ url_for('static', filename='icons/addOrder.png') }}" class="sideIcon">Add Order
+          </a>
+        </div>
+        <div style="height: 40px;"></div>
+       <div style="height: 300px;"></div>
+    </div>
+  </div>
+
+  <div name="main" style="float: left; width: 73%">
+    <div style="text-align: right;">
+      <font size="4">
+      Hi,&nbsp{{curr_user}}
+      <br>
+      <a href="/logout"> Logout </a>
+      </font>
+    </div>
+  	<div style="text-align: center; padding: 50px;">
+  		<h1><u>User Panel</u></h1>
+  	</div>
+  	<div style="text-align: center;">
+  		<table class="tableLay">
+  			<tr>
+          <td class="dataLay"><h3>id</h3></td>
+          <td class="dataLay"><h3>Name</h3></td>
+          <td class="dataLay"><h3>Email</h3></td>
+          <td class="dataLay"><h3>Company</h3></td>
+        </tr>
+        {% for item in user_list %}
+          <tr>
+            <td class="dataLay">{{item.id}}</td>
+            <td class="dataLay">{{item.name}}</td>
+            <td class="dataLay">{{item.email}}</td>
+            <td class="dataLay">{{item.customer_name}}</td>
+          </tr>
+        {% endfor %}
+    	</table>
+    </div>
+  </div>
+</body>
+</html>

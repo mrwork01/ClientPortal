@@ -1,0 +1,28 @@
+{% from "security/_macros.html" import render_field_with_errors, render_field %}
+{% include "security/_messages.html" %}
+
+<html>
+<link href="{{ url_for('static', filename='css/login.css') }}" type= "text/css" rel="stylesheet"/>
+<link rel="shortcut icon" href="">
+<div style="padding: 100px;">
+	<div class="loginFrame" style="height: 450px">
+		<div class="logo">
+			<h1>Company Name</h1>
+		</div>
+		<div style="padding: 30px; text-align: left;">
+			<form method="POST">
+				{{ form.csrf_token }}
+				{{ render_field_with_errors(form.email)}}
+				{{ render_field_with_errors(form.company)}}
+				{{ render_field_with_errors(form.first)}}
+				{{ render_field_with_errors(form.last)}}
+				{{ render_field_with_errors(form.password)}}
+				{{ render_field_with_errors(form.confirm)}}
+				
+					{{ form.submit }}
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head></head>
+  <body>
+  	<link href="{{ url_for('static', filename='css/admin.css') }}" type= "text/css" rel="stylesheet"/>
+      <div>
+      <div style="text-align: right;">
+        <font size="4">
+        Hi,&nbsp{{curr_user}}
+        <br>
+  			<a href="/logout"> Logout </a>
+      </font>
+  		</div>
+  		<div style="text-align: center; padding: 50px;">
+  			<h1><u>Admin Panel</u></h1>
+  		</div>
+  		<div style="text-align: center;">
+  			<table>
+  				<tr>
+  					<td>
+  						<a href="/users">
+                <img src="{{ url_for('static', filename='icons/users.png') }}">
+                <h3>Current Users</h3></a>
+  					</td>
+  					<td>
+  						<a href="/register">
+                <img src="{{ url_for('static', filename='icons/addUsers.png') }}">
+                <h3>Add Users</h3></a>
+            </td>
+  				  <td>
+              <a href="/jobList">
+                <img src="{{ url_for('static', filename='icons/workOrders.png') }}">
+                <h3>Current Work Orders</h3></a>
+            </td>
+            <td>
+              <a href="/addJob">
+                <img src="{{ url_for('static', filename='icons/addOrder.png') }}">
+                <h3>Add Work Order</h3></a>
+            </td>
+          </tr>
+        </table>
+    	</div>
+  </body>
+</html>

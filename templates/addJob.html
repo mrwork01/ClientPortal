@@ -1,0 +1,88 @@
+<html>
+	<head>
+		<link href="{{ url_for('static', filename='css/dataFrame.css') }}" type= "text/css" rel="stylesheet">
+		<script src="{{ url_for('static', filename='js/jquery-3.5.0.js') }}" type="text/javascript"></script>
+    	<script src="{{ url_for('static', filename='js/addorder.js') }}" type="text/javascript"></script>
+	</head>
+	<body>
+	<div name="side" style="float: left; width: 23%" class="jobFrame" >
+        <div style="margin-top: 15px;"><center><h1><u>Admin Panel</u></h1></center></div>
+        <div style="height: 20px;"></div>
+        <div>
+          <a href="/users" class="sideLink">
+            <img src="{{ url_for('static', filename='icons/users.png') }}" class="sideIcon">Users
+          </a>
+        </div>
+        <div>
+          <a href="/register" class="sideLink">
+            <img src="{{ url_for('static', filename='icons/addUsers.png') }}" class="sideIcon">Add Users
+          </a>
+        </div>
+        <div>
+          <a href="/admin" class="sideLink">
+            <img src="{{ url_for('static', filename='icons/workOrders.png') }}" class="sideIcon">Work Orders
+          </a>
+        </div>
+        <div>
+          <a href="/addJob" class="sideLink">
+            <img src="{{ url_for('static', filename='icons/addOrder.png') }}" class="sideIcon">Add Order
+          </a>
+        </div>
+        <div style="height: 40px;"></div>
+       <div style="height: 300px;"></div>
+    </div>
+	<div div name="side" style="float: left; width: 73%">
+		<div style="text-align: right;">
+			<font size="4">
+			Hi,&nbsp{{curr_user}}
+			<br>
+			<a href="/logout"> Logout </a>
+			</font>
+		</div>
+		<div>
+			<h1><center><u>Add Job</u></center></h1>
+		</div>
+		<br>
+		<div class ="addJobForm">
+			<form method="POST">
+				WO#: <input type="text" name="wo_num">
+				<br>
+				<br>
+				Customer: 
+					<select id="companySelect">
+						<option disabled selected value=''>--Select Customer--</option>
+						{% for name in cust_list %}
+							<option value="{{name}}">{{name}}</option>
+						{% endfor %}
+					</select>
+				<br>
+				<br>
+				Manager: 
+					<select name="owner" id="managerSelect">
+					</select>
+				<br>
+				<br>
+				Address: <input type="text" name="address">
+				<br>
+				<br>
+				Status: 
+					<select name="status">
+						<option value="Received">Received</option>
+						<option value="Added to Schedule">Added to Schedule</option>
+						<option value="Assessed">Assessed</option>
+						<option value="Estimate Sent">Estimate Sent</option>
+						<option value="Complete">Complete</option>
+					</select>
+				<br>
+				<br>
+				<input type="submit" name="submit" onClick="addBox()">
+			</form>
+		</div>
+	</div>
+	<script>
+    function addBox(){
+      alert("Order Added");
+    }
+  </script>
+	</body>
+</html>

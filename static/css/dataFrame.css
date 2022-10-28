@@ -1,0 +1,51 @@
+.tableLay{
+	border: 1px solid black;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.dataLay {
+	border: 1px solid black;
+	padding: 2px;
+}
+
+.jobFrame {
+	background-color: rgb(23, 161,0);
+	box-shadow: 5px 5px 5px lightgrey;
+	margin: 2px;
+	border-radius: 15px;
+	border: 2px solid black;
+}
+
+html, body {
+	height: 100%;
+	margin: 0;
+}
+
+.sideIcon {
+	margin-left: 40px;
+	height: 60px;
+	width: 60px;
+	vertical-align: middle;
+	margin-right: 20px;
+	margin-bottom: 10px;
+}
+
+.hyperLink {
+	display: flex;
+	align-items: center;
+}
+
+.sideLink{
+	text-decoration: none;
+	color: black;
+}
+
+
+.addJobForm {
+	width: 300px; 
+	margin: auto; 
+	padding: 10px; 
+	border: 1px solid black;
+	box-shadow: 5px 5px 5px lightgrey;
+}
